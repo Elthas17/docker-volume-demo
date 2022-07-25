@@ -1,0 +1,28 @@
+version: '3.3'
+services:
+  write:
+    build:
+      context: ./write
+    volumes:
+      - image-classification:/data
+    environment:
+      - DATAFOLDER=data
+      - FILENAME=hello
+    image: containerregistry.io/image-classification-write:latest
+    container_name: write
+    #restart: always
+  read:
+    build:
+      context: ./read
+    volumes:
+      - image-classification:/data
+    environment:
+      - DATAFOLDER=data
+      - FILENAME=hello
+    image: containerregistry.io/image-classification-read:latest
+    container_name: read
+    #restart: always
+
+
+volumes:
+  image-classification:
